@@ -1,0 +1,39 @@
+@startuml
+' Billetterie ERD - Version TP simplifiée
+
+entity "Venue" as venue {
+  name : VARCHAR
+  city : VARCHAR
+  capacity : INT
+}
+
+entity "Event" as event {
+  title : VARCHAR
+  date : DATE
+  venue_id : INT
+  category : VARCHAR
+  price_eur : DECIMAL
+}
+
+entity "Client" as client {
+  first_name : VARCHAR
+  last_name : VARCHAR
+  email : VARCHAR
+  city : VARCHAR
+}
+
+entity "Ticket" as ticket {
+  event_id : INT
+  client_id : INT
+  purchase_date : DATE
+  seat : VARCHAR
+  status : VARCHAR
+  price_paid : DECIMAL
+}
+
+' Relations entre entités
+venue --o{ event : hosts
+event --o{ ticket : has
+client --o{ ticket : buys
+
+@enduml
