@@ -1,185 +1,223 @@
--- Venues
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (1, 'La Grande Salle', 'Paris', 2000);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (2, 'Théâtre du Nord', 'Lille', 800);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (3, 'Palais des Congrès', 'Paris', 3500);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (4, 'Salle Riviera', 'Nice', 1200);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (5, 'Le Dock', 'Bordeaux', 600);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (6, 'Opéra Métropolitain', 'Lyon', 1500);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (7, 'Arena Marseille', 'Marseille', 5000);
-INSERT INTO Venue (venue_id, name, city, capacity) VALUES (8, 'Studio 7', 'Strasbourg', 400);
+INSERT INTO Salle (nom, ville, capacite) VALUES
+('Théâtre du Chêne Noir', 'Avignon', 450),
+('La Cigale', 'Paris', 1389),
+('Le Radiant-Bellevue', 'Lyon', 2500),
+('Zénith de Lille', 'Lille', 7000),
+('Théâtre Sébastopol', 'Lille', 1350),
+('Comédie Odéon', 'Lyon', 300),
+('Théâtre du Gymnase', 'Marseille', 900),
+('Palais des Congrès', 'Paris', 3720),
+('Théâtre des Célestins', 'Lyon', 800),
+('Opéra Garnier', 'Paris', 1979);
 
--- Events
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (1, 'Stand-up 1 - Live', '2025-10-10', 8, 'Festival', 54.37);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (2, 'Exposition 2 - Show', '2025-10-09', 6, 'Théâtre', 119.85);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (3, 'Festival 3 - Live', '2025-11-13', 3, 'Exposition', 30.07);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (4, 'Conférence 4 - Special', '2025-10-23', 5, 'Théâtre', 118.27);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (5, 'Festival 5 - Night', '2025-10-06', 3, 'Festival', 37.19);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (6, 'Concert 6 - Night', '2025-11-13', 4, 'Stand-up', 17.91);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (7, 'Stand-up 7 - Live', '2025-11-22', 1, 'Concert', 24.04);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (8, 'Théâtre 8 - Show', '2025-10-10', 6, 'Théâtre', 116.0);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (9, 'Concert 9 - Show', '2025-10-27', 4, 'Théâtre', 73.3);
-INSERT INTO Event (event_id, title, date, venue_id, category, price_eur) VALUES (10, 'Théâtre 10 - Special', '2025-11-22', 7, 'Théâtre', 32.27);
+INSERT INTO Spectacle (id_salle, titre, affiche, tags, duree, description_courte, description_longue, langue, age_minimum, date_evenement)
+VALUES
+(1, 'Le Cid revisité', 'affiches/lecid.jpg', 'classique,drame,théâtre', 120, 'Une adaptation moderne du chef-d’œuvre de Corneille.', 'Cette version contemporaine du "Cid" revisite les grands thèmes de l’honneur et de l’amour, portée par une mise en scène audacieuse et des décors minimalistes.', 'Français', 12, '2025-11-10'),
+(2, 'Concert de Zaz', 'affiches/zaz.jpg', 'musique,chanson française', 90, 'Zaz en tournée avec ses plus grands titres.', 'La chanteuse française Zaz revient sur scène avec un concert chaleureux mêlant ses classiques et de nouveaux morceaux inédits.', 'Français', 6, '2025-12-05'),
+(3, 'Impro Comedy Night', 'affiches/impro.jpg', 'humour,improvisation', 100, 'Un show d’improvisation hilarant !', 'Des comédiens talentueux improvisent sur des thèmes donnés par le public. Fous rires garantis à chaque représentation.', 'Français', 10, '2025-10-30'),
+(4, 'Symphonie No.9 – Beethoven', 'affiches/beethoven.jpg', 'musique,classique,orchestre', 75, 'Un concert symphonique exceptionnel.', 'L’Orchestre Philharmonique de Lille interprète la célèbre Neuvième Symphonie de Beethoven sous la direction de Jean-Claude Casadesus.', 'Instrumental', 8, '2025-11-20'),
+(5, 'Les Misérables – Comédie musicale', 'affiches/lesmiserables.jpg', 'comédie musicale,drame', 160, 'La célèbre comédie musicale enfin en tournée.', 'Une mise en scène grandiose et des voix puissantes pour revisiter l’œuvre de Victor Hugo dans une version française et émotive.', 'Français', 10, '2025-12-01'),
+(6, 'One Woman Show – Clara Duval', 'affiches/claraduval.jpg', 'humour,stand-up', 85, 'Une humoriste explosive sur scène.', 'Clara Duval livre un spectacle hilarant sur la vie quotidienne, les relations et les absurdités modernes.', 'Français', 14, '2025-11-14'),
+(7, 'Roméo et Juliette', 'affiches/romeoetjuliette.jpg', 'drame,romance,théâtre', 130, 'La tragédie romantique universelle.', 'Une mise en scène poétique et épurée de la célèbre tragédie de Shakespeare.', 'Français', 12, '2025-11-22'),
+(8, 'Conférence : L’IA et le futur', 'affiches/iafuture.jpg', 'conférence,technologie', 60, 'Une exploration du futur de l’intelligence artificielle.', 'Des experts du domaine de la technologie et de l’éthique débattent sur l’avenir de l’IA et ses impacts sur nos vies.', 'Français', 16, '2025-10-25'),
+(9, 'Ballet Casse-Noisette', 'affiches/cassenoisette.jpg', 'danse,classique,noël', 110, 'Le conte féerique de Noël par le Ballet de Lyon.', 'Une représentation magique mêlant danse, costumes somptueux et décors féeriques.', 'Français', 6, '2025-12-15'),
+(10, 'Jazz Nights – Tribute to Miles Davis', 'affiches/milesdavis.jpg', 'musique,jazz,concert', 90, 'Un hommage vibrant au maître du jazz.', 'Un quintet exceptionnel revisite les plus grands morceaux de Miles Davis dans une ambiance intimiste.', 'Instrumental', 12, '2025-11-05');
 
--- Clients
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (1, 'Nicolas', 'Garnier', 'nicolas.garnier1@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (2, 'Marie', 'Durand', 'marie.durand2@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (3, 'Emma', 'Petit', 'emma.petit3@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (4, 'Thomas', 'Robert', 'thomas.robert4@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (5, 'Alex', 'Leroy', 'alex.leroy5@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (6, 'Paul', 'Fournier', 'paul.fournier6@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (7, 'Julie', 'Durand', 'julie.durand7@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (8, 'Marie', 'Garnier', 'marie.garnier8@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (9, 'Hugo', 'Martin', 'hugo.martin9@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (10, 'Mathieu', 'Leroy', 'mathieu.leroy10@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (11, 'Laura', 'Bernard', 'laura.bernard11@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (12, 'Sophie', 'Petit', 'sophie.petit12@example.com', 'Nantes');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (13, 'Laura', 'Leroy', 'laura.leroy13@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (14, 'Mathieu', 'Martin', 'mathieu.martin14@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (15, 'Thomas', 'Roux', 'thomas.roux15@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (16, 'Camille', 'Guerin', 'camille.guerin16@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (17, 'Chloé', 'Durand', 'chloé.durand17@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (18, 'Claire', 'Durand', 'claire.durand18@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (19, 'Antoine', 'Richard', 'antoine.richard19@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (20, 'Mathieu', 'Guerin', 'mathieu.guerin20@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (21, 'Laura', 'Petit', 'laura.petit21@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (22, 'Alex', 'Thomas', 'alex.thomas22@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (23, 'Thomas', 'Petit', 'thomas.petit23@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (24, 'Sophie', 'Dubois', 'sophie.dubois24@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (25, 'Paul', 'Bernard', 'paul.bernard25@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (26, 'Chloé', 'Garnier', 'chloé.garnier26@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (27, 'Sophie', 'Leroy', 'sophie.leroy27@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (28, 'Hugo', 'Thomas', 'hugo.thomas28@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (29, 'Claire', 'Richard', 'claire.richard29@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (30, 'Claire', 'Richard', 'claire.richard30@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (31, 'Marie', 'Robert', 'marie.robert31@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (32, 'Julie', 'Chevalier', 'julie.chevalier32@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (33, 'Nicolas', 'Dubois', 'nicolas.dubois33@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (34, 'Marie', 'Chevalier', 'marie.chevalier34@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (35, 'Julie', 'Petit', 'julie.petit35@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (36, 'Hugo', 'Roux', 'hugo.roux36@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (37, 'Laura', 'Dubois', 'laura.dubois37@example.com', 'Lyon');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (38, 'Emma', 'Robert', 'emma.robert38@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (39, 'Laura', 'Dubois', 'laura.dubois39@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (40, 'Paul', 'Richard', 'paul.richard40@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (41, 'Laura', 'Dubois', 'laura.dubois41@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (42, 'Antoine', 'Chevalier', 'antoine.chevalier42@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (43, 'Alex', 'Leroy', 'alex.leroy43@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (44, 'Julie', 'Moreau', 'julie.moreau44@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (45, 'Marie', 'Dubois', 'marie.dubois45@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (46, 'Mathieu', 'Blanc', 'mathieu.blanc46@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (47, 'Sophie', 'Dubois', 'sophie.dubois47@example.com', 'Lille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (48, 'Lucas', 'Moreau', 'lucas.moreau48@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (49, 'Antoine', 'Martin', 'antoine.martin49@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (50, 'Sophie', 'Durand', 'sophie.durand50@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (51, 'Chloé', 'Thomas', 'chloé.thomas51@example.com', 'Nice');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (52, 'Sophie', 'Thomas', 'sophie.thomas52@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (53, 'Thomas', 'Chevalier', 'thomas.chevalier53@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (54, 'Marie', 'Roux', 'marie.roux54@example.com', 'Bordeaux');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (55, 'Mathieu', 'Martin', 'mathieu.martin55@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (56, 'Laura', 'Thomas', 'laura.thomas56@example.com', 'Strasbourg');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (57, 'Claire', 'Dubois', 'claire.dubois57@example.com', 'Marseille');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (58, 'Emma', 'Thomas', 'emma.thomas58@example.com', 'Nantes');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (59, 'Chloé', 'Thomas', 'chloé.thomas59@example.com', 'Paris');
-INSERT INTO Client (client_id, first_name, last_name, email, city) VALUES (60, 'Antoine', 'Leroy', 'antoine.leroy60@example.com', 'Paris');
+INSERT INTO Photo (id_spectacle, photo) VALUES
+(1, 'photos/lecid_scene1.jpg'),
+(1, 'photos/lecid_scene2.jpg'),
+(2, 'photos/zaz_live1.jpg'),
+(2, 'photos/zaz_public.jpg'),
+(3, 'photos/impro_groupe.jpg'),
+(4, 'photos/beethoven_orchestre.jpg'),
+(5, 'photos/lesmiserables_cast.jpg'),
+(7, 'photos/romeo_balcony.jpg'),
+(9, 'photos/cassenoisette_danseurs.jpg'),
+(10, 'photos/milesdavis_scene.jpg');
 
--- Tickets
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (1, 8, 42, '2025-10-24', 'B26', 'sold', 105.54);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (2, 6, 41, '2025-12-12', 'F3', 'sold', 15.23);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (3, 2, 52, '2025-09-20', 'C19', 'sold', 107.67);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (4, 8, 4, '2025-12-06', 'F4', 'sold', 114.82);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (5, 3, 15, '2025-12-02', 'E12', 'sold', 29.37);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (6, 3, 43, '2025-10-02', 'B26', 'sold', 31.3);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (7, 1, 4, '2025-09-25', 'D29', 'sold', 56.37);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (8, 2, 1, '2025-11-22', 'A19', 'sold', 102.28);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (9, 5, 4, '2025-11-28', 'B25', 'refunded', 33.86);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (10, 2, 32, '2025-10-18', 'F20', 'sold', 102.99);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (11, 4, 31, '2025-10-31', 'F4', 'sold', 102.63);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (12, 6, 31, '2025-12-09', 'E10', 'sold', 18.75);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (13, 4, 10, '2025-09-21', 'A20', 'sold', 123.59);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (14, 6, 41, '2025-10-13', 'F5', 'sold', 17.22);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (15, 9, 20, '2025-12-25', 'D7', 'sold', 68.44);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (16, 9, 29, '2025-10-23', 'B28', 'reserved', 76.86);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (17, 5, 31, '2025-10-11', 'D20', 'sold', 35.47);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (18, 4, 25, '2025-10-02', 'D2', 'sold', 111.26);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (19, 6, 25, '2025-12-13', 'A8', 'sold', 15.57);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (20, 3, 10, '2025-12-27', 'D24', 'sold', 31.17);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (21, 6, 46, '2025-10-31', 'D4', 'refunded', 16.47);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (22, 5, 46, '2025-11-17', 'D28', 'sold', 38.46);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (23, 6, 55, '2025-11-23', 'D29', 'refunded', 17.65);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (24, 2, 30, '2025-10-08', 'A11', 'sold', 111.57);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (25, 3, 35, '2025-09-24', 'C9', 'sold', 29.14);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (26, 9, 45, '2025-09-11', 'D16', 'sold', 70.8);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (27, 10, 47, '2025-12-15', 'C10', 'sold', 31.61);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (28, 4, 47, '2025-10-01', 'F1', 'sold', 117.22);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (29, 7, 57, '2025-11-05', 'C17', 'reserved', 24.75);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (30, 2, 35, '2025-09-24', 'B29', 'sold', 111.36);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (31, 4, 51, '2025-10-05', 'D6', 'sold', 110.48);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (32, 3, 4, '2025-11-23', 'F18', 'sold', 27.97);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (33, 4, 9, '2025-11-07', 'F16', 'sold', 120.31);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (34, 4, 26, '2025-10-19', 'D26', 'sold', 105.55);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (35, 1, 46, '2025-09-09', 'A23', 'sold', 54.75);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (36, 9, 52, '2025-12-30', 'E8', 'reserved', 68.84);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (37, 4, 32, '2025-10-03', 'A12', 'sold', 122.38);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (38, 7, 55, '2025-10-03', 'B2', 'sold', 24.63);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (39, 9, 15, '2025-11-08', 'E19', 'sold', 75.4);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (40, 3, 52, '2025-12-24', 'E7', 'sold', 28.93);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (41, 7, 3, '2025-11-29', 'B25', 'sold', 21.22);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (42, 8, 28, '2025-09-26', 'E5', 'sold', 105.54);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (43, 4, 50, '2025-09-13', 'E25', 'sold', 104.25);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (44, 9, 20, '2025-12-01', 'C21', 'sold', 74.26);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (45, 5, 29, '2025-10-05', 'F16', 'sold', 35.25);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (46, 1, 53, '2025-09-21', 'E30', 'sold', 56.57);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (47, 7, 23, '2025-12-11', 'E22', 'sold', 22.19);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (48, 5, 6, '2025-10-10', 'A1', 'sold', 33.98);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (49, 8, 36, '2025-11-07', 'F25', 'sold', 120.14);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (50, 2, 11, '2025-11-20', 'F26', 'sold', 124.04);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (51, 6, 60, '2025-12-10', 'D11', 'sold', 17.72);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (52, 9, 7, '2025-09-27', 'F7', 'sold', 73.89);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (53, 3, 5, '2025-10-01', 'D9', 'sold', 27.7);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (54, 10, 51, '2025-10-07', 'B21', 'sold', 32.68);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (55, 1, 4, '2025-09-21', 'A3', 'sold', 48.15);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (56, 5, 18, '2025-09-16', 'B12', 'sold', 34.68);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (57, 9, 28, '2025-12-16', 'B29', 'sold', 71.27);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (58, 2, 36, '2025-12-30', 'A5', 'sold', 118.88);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (59, 3, 55, '2025-09-22', 'B29', 'sold', 30.0);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (60, 2, 32, '2025-12-02', 'F4', 'reserved', 116.58);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (61, 10, 42, '2025-10-28', 'E30', 'sold', 30.31);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (62, 5, 8, '2025-11-02', 'D15', 'sold', 37.1);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (63, 7, 41, '2025-09-12', 'B14', 'sold', 21.41);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (64, 3, 7, '2025-12-18', 'D22', 'sold', 30.46);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (65, 7, 59, '2025-10-10', 'B2', 'refunded', 23.33);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (66, 4, 49, '2025-09-24', 'E13', 'reserved', 112.04);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (67, 8, 11, '2025-11-24', 'D7', 'sold', 106.47);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (68, 6, 10, '2025-12-12', 'F15', 'sold', 16.29);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (69, 1, 15, '2025-09-23', 'D12', 'sold', 47.37);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (70, 2, 47, '2025-12-12', 'D2', 'sold', 104.55);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (71, 9, 14, '2025-09-16', 'E10', 'sold', 72.19);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (72, 8, 60, '2025-10-25', 'D8', 'reserved', 119.61);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (73, 8, 17, '2025-09-12', 'B27', 'refunded', 114.48);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (74, 4, 22, '2025-10-10', 'D12', 'reserved', 116.16);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (75, 10, 31, '2025-11-05', 'A23', 'sold', 32.68);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (76, 10, 18, '2025-09-16', 'A26', 'sold', 28.8);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (77, 4, 59, '2025-10-17', 'D8', 'sold', 121.21);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (78, 9, 2, '2025-11-15', 'F1', 'sold', 76.18);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (79, 9, 25, '2025-11-11', 'E14', 'sold', 71.62);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (80, 9, 5, '2025-12-27', 'D1', 'sold', 75.29);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (81, 1, 44, '2025-12-10', 'F4', 'sold', 50.36);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (82, 7, 34, '2025-10-27', 'C23', 'sold', 22.49);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (83, 5, 50, '2025-12-29', 'C4', 'sold', 32.92);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (84, 1, 38, '2025-11-28', 'C1', 'reserved', 46.27);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (85, 3, 20, '2025-12-30', 'D5', 'reserved', 30.87);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (86, 10, 44, '2025-09-20', 'B16', 'sold', 31.79);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (87, 7, 54, '2025-10-13', 'F8', 'sold', 22.83);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (88, 3, 52, '2025-11-20', 'C2', 'refunded', 29.97);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (89, 2, 2, '2025-10-16', 'B29', 'sold', 110.1);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (90, 2, 47, '2025-12-02', 'B5', 'sold', 115.46);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (91, 8, 34, '2025-10-03', 'A1', 'sold', 108.94);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (92, 7, 35, '2025-12-06', 'B16', 'sold', 23.41);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (93, 6, 55, '2025-09-30', 'B23', 'sold', 17.39);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (94, 2, 57, '2025-11-01', 'C4', 'sold', 113.85);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (95, 5, 15, '2025-11-23', 'D29', 'sold', 33.87);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (96, 10, 24, '2025-09-15', 'F9', 'sold', 27.87);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (97, 4, 49, '2025-12-26', 'A23', 'sold', 110.7);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (98, 7, 60, '2025-09-26', 'E22', 'sold', 21.38);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (99, 9, 31, '2025-09-07', 'F15', 'sold', 64.11);
-INSERT INTO Ticket (ticket_id, event_id, client_id, purchase_date, seat, status, price_paid) VALUES (100, 1, 32, '2025-11-07', 'F21', 'sold', 50.14);
+INSERT INTO Seance (id_spectacle, date_heure, prix) VALUES
+(1, '2025-11-10 20:30:00', 25.00),
+(1, '2025-11-11 20:30:00', 25.00),
+(2, '2025-12-05 21:00:00', 45.00),
+(3, '2025-10-30 19:30:00', 18.00),
+(3, '2025-11-02 21:00:00', 20.00),
+(4, '2025-11-20 20:00:00', 30.00),
+(5, '2025-12-01 19:30:00', 55.00),
+(6, '2025-11-14 20:30:00', 28.00),
+(7, '2025-11-22 20:30:00', 26.00),
+(9, '2025-12-15 18:00:00', 40.00),
+(10, '2025-11-05 21:00:00', 32.00);
+
+INSERT INTO Client (prenom, nom, email, adresse, num_tel) VALUES
+('Alice', 'Durand', 'alice.durand@mail.com', '12 rue des Lilas, Lyon', '0612345678'),
+('Thomas', 'Bernard', 'thomas.bernard@mail.com', '45 avenue de la République, Paris', '0622334455'),
+('Claire', 'Dupuis', 'claire.dupuis@mail.com', '3 impasse des Peupliers, Marseille', '0678452390'),
+('Lucas', 'Moreau', 'lucas.moreau@mail.com', '8 rue du Moulin, Lille', '0656987412'),
+('Sophie', 'Giraud', 'sophie.giraud@mail.com', '10 boulevard Victor Hugo, Lyon', '0765123498'),
+('Mathieu', 'Lemoine', 'mathieu.lemoine@mail.com', '22 rue de la Liberté, Nantes', '0611223344'),
+('Élodie', 'Roux', 'elodie.roux@mail.com', '5 allée des Tilleuls, Paris', '0789123476'),
+('Julien', 'Lefèvre', 'julien.lefevre@mail.com', '9 rue des Roses, Toulouse', '0678123499'),
+('Camille', 'Martin', 'camille.martin@mail.com', '14 place Bellecour, Lyon', '0645789965'),
+('Antoine', 'Girard', 'antoine.girard@mail.com', '2 rue des Prés, Strasbourg', '0678452365'),
+('Mélanie', 'Petit', 'melanie.petit@mail.com', '13 avenue Pasteur, Paris', '0659321478'),
+('Nicolas', 'Marchand', 'nicolas.marchand@mail.com', '7 rue du Faubourg, Dijon', '0625789431'),
+('Marion', 'Fontaine', 'marion.fontaine@mail.com', '4 rue des Glycines, Marseille', '0632147896'),
+('Victor', 'Chevalier', 'victor.chevalier@mail.com', '19 rue de la Paix, Bordeaux', '0615782394'),
+('Inès', 'Blanc', 'ines.blanc@mail.com', '17 rue des Fleurs, Nice', '0756891234'),
+('Hugo', 'Perrin', 'hugo.perrin@mail.com', '11 rue Lafayette, Lille', '0789456123'),
+('Laura', 'Renard', 'laura.renard@mail.com', '3 rue du Château, Lyon', '0645871293'),
+('Alexandre', 'Renaud', 'alexandre.renaud@mail.com', '10 avenue Jean Jaurès, Paris', '0678452311'),
+('Julie', 'Fabre', 'julie.fabre@mail.com', '25 rue du Port, Marseille', '0665987412'),
+('Damien', 'Leclerc', 'damien.leclerc@mail.com', '4 place des Arts, Toulouse', '0698745123'),
+('Chloé', 'Dupont', 'chloe.dupont@mail.com', '7 rue du Stade, Nantes', '0789456122'),
+('Martin', 'Guérin', 'martin.guerin@mail.com', '12 rue Principale, Metz', '0632147856'),
+('Manon', 'Lucas', 'manon.lucas@mail.com', '5 rue du Rhône, Lyon', '0657894132'),
+('Romain', 'Poulain', 'romain.poulain@mail.com', '8 avenue de la Gare, Paris', '0689745123'),
+('Léa', 'Dumas', 'lea.dumas@mail.com', '9 chemin du Soleil, Nice', '0712345698'),
+('Adrien', 'Perrot', 'adrien.perrot@mail.com', '18 rue Saint-Michel, Lille', '0654789321'),
+('Célia', 'Moulin', 'celia.moulin@mail.com', '20 rue des Jardins, Rennes', '0665789342'),
+('Bastien', 'Langlois', 'bastien.langlois@mail.com', '3 impasse Victor Hugo, Lyon', '0645127893'),
+('Noémie', 'Masson', 'noemie.masson@mail.com', '11 rue Gambetta, Toulouse', '0698745231'),
+('Éric', 'Lemoine', 'eric.lemoine@mail.com', '8 rue des Capucines, Paris', '0678941234'),
+('Pauline', 'Caron', 'pauline.caron@mail.com', '10 rue des Écoles, Marseille', '0654789632'),
+('Yann', 'Vidal', 'yann.vidal@mail.com', '5 rue du Parc, Montpellier', '0678452399'),
+('Isabelle', 'Henry', 'isabelle.henry@mail.com', '19 boulevard Voltaire, Paris', '0632147895'),
+('Clément', 'Fournier', 'clement.fournier@mail.com', '2 rue du Lac, Annecy', '0654789654'),
+('Marine', 'Lemoine', 'marine.lemoine@mail.com', '6 avenue de la République, Dijon', '0612345698'),
+('Esteban', 'Boucher', 'esteban.boucher@mail.com', '8 rue de la Fontaine, Lyon', '0689745129'),
+('Aurélie', 'Colin', 'aurelie.colin@mail.com', '10 allée des Peupliers, Marseille', '0678452394'),
+('Raphaël', 'Baron', 'raphael.baron@mail.com', '14 rue de Bretagne, Paris', '0623147896'),
+('Sarah', 'Roche', 'sarah.roche@mail.com', '12 rue de la Liberté, Lille', '0667895412'),
+('Valentin', 'Robin', 'valentin.robin@mail.com', '9 chemin des Vignes, Lyon', '0689745233'),
+('Olivier', 'Texier', 'olivier.texier@mail.com', '7 rue des Coquelicots, Nantes', '0678452397'),
+('Emma', 'Mercier', 'emma.mercier@mail.com', '13 rue des Amandiers, Paris', '0654789123'),
+('Léo', 'Faure', 'leo.faure@mail.com', '2 avenue des Ternes, Bordeaux', '0678945122'),
+('Nina', 'Bertin', 'nina.bertin@mail.com', '5 avenue du Théâtre, Lyon', '0612354789'),
+('Guillaume', 'Le Gall', 'guillaume.legall@mail.com', '11 rue du Parc, Brest', '0698745124'),
+('Amélie', 'Deschamps', 'amelie.deschamps@mail.com', '9 rue des Acacias, Marseille', '0658741236'),
+('Nathan', 'Mallet', 'nathan.mallet@mail.com', '15 rue du Canal, Paris', '0669784123'),
+('Éva', 'Benoit', 'eva.benoit@mail.com', '4 rue des Alouettes, Lille', '0678452398'),
+('Robin', 'Delattre', 'robin.delattre@mail.com', '7 rue Saint-Jean, Toulouse', '0657894321'),
+('Zoé', 'Morin', 'zoe.morin@mail.com', '3 rue des Lilas, Lyon', '0678945129'),
+('Corentin', 'Gosselin', 'corentin.gosselin@mail.com', '12 rue du Marché, Paris', '0623148759');
+
+
+INSERT INTO Historique (id_client, id_spectacle) VALUES
+(1, 3), (1, 6),
+(2, 5),
+(3, 2),
+(4, 1),
+(5, 4), (5, 10),
+(6, 7),
+(7, 9),
+(8, 6),
+(9, 1), (9, 3),
+(10, 8),
+(11, 5),
+(12, 9),
+(13, 3),
+(14, 2),
+(15, 4), (15, 6),
+(16, 10),
+(17, 5),
+(18, 1),
+(19, 7), (19, 9),
+(20, 8),
+(21, 6),
+(22, 4),
+(23, 3),
+(24, 1), (24, 10),
+(25, 5),
+(26, 2),
+(27, 7),
+(28, 8),
+(29, 9),
+(30, 4);
+
+INSERT INTO Billet (id_spectacle, id_client, date_achat, place, statut, prix_paye) VALUES
+(1, 1, '2025-10-20', 'A12', 'payé', 25.00),
+(1, 9, '2025-10-21', 'B05', 'payé', 25.00),
+(1, 24, '2025-10-18', 'C07', 'payé', 25.00),
+(2, 3, '2025-11-10', 'A03', 'payé', 45.00),
+(2, 14, '2025-11-12', 'A10', 'payé', 45.00),
+(2, 26, '2025-11-14', 'B08', 'payé', 45.00),
+(3, 1, '2025-10-15', 'A04', 'payé', 18.00),
+(3, 9, '2025-10-16', 'A05', 'payé', 18.00),
+(3, 13, '2025-10-14', 'A06', 'payé', 18.00),
+(3, 23, '2025-10-17', 'B02', 'payé', 18.00),
+(4, 5, '2025-10-28', 'A01', 'payé', 30.00),
+(4, 15, '2025-10-28', 'A02', 'payé', 30.00),
+(4, 22, '2025-10-29', 'B05', 'payé', 30.00),
+(4, 30, '2025-10-30', 'B06', 'payé', 30.00),
+(5, 2, '2025-11-10', 'A11', 'payé', 55.00),
+(5, 11, '2025-11-11', 'A12', 'payé', 55.00),
+(5, 17, '2025-11-12', 'B01', 'payé', 55.00),
+(5, 25, '2025-11-14', 'B02', 'payé', 55.00),
+(6, 1, '2025-10-25', 'A09', 'payé', 28.00),
+(6, 8, '2025-10-26', 'B03', 'payé', 28.00),
+(6, 15, '2025-10-27', 'A07', 'payé', 28.00),
+(6, 21, '2025-10-27', 'C02', 'payé', 28.00),
+(7, 6, '2025-11-01', 'A05', 'payé', 26.00),
+(7, 19, '2025-11-01', 'A06', 'payé', 26.00),
+(7, 27, '2025-11-02', 'A07', 'payé', 26.00),
+(8, 10, '2025-10-10', 'A01', 'payé', 20.00),
+(8, 20, '2025-10-11', 'A02', 'payé', 20.00),
+(8, 28, '2025-10-12', 'B01', 'payé', 20.00),
+(9, 7, '2025-11-20', 'A01', 'payé', 40.00),
+(9, 12, '2025-11-22', 'A02', 'payé', 40.00),
+(9, 19, '2025-11-22', 'B01', 'payé', 40.00),
+(9, 29, '2025-11-24', 'B02', 'payé', 40.00),
+(10, 5, '2025-10-30', 'A03', 'payé', 32.00),
+(10, 16, '2025-10-30', 'A04', 'payé', 32.00),
+(10, 24, '2025-10-31', 'B01', 'payé', 32.00),
+(10, 40, '2025-10-31', 'B02', 'payé', 32.00),
+(1, 32, '2025-10-21', 'C01', 'payé', 25.00),
+(2, 33, '2025-11-11', 'C02', 'payé', 45.00),
+(3, 34, '2025-10-13', 'C03', 'payé', 18.00),
+(4, 35, '2025-10-29', 'C04', 'payé', 30.00),
+(5, 36, '2025-11-15', 'C05', 'payé', 55.00),
+(6, 37, '2025-10-28', 'C06', 'payé', 28.00),
+(7, 38, '2025-11-03', 'C07', 'payé', 26.00),
+(8, 39, '2025-10-15', 'C08', 'payé', 20.00),
+(9, 41, '2025-11-23', 'C09', 'payé', 40.00),
+(10, 42, '2025-10-31', 'C10', 'payé', 32.00),
+(1, 43, '2025-10-19', 'D01', 'payé', 25.00),
+(2, 44, '2025-11-13', 'D02', 'payé', 45.00),
+(3, 45, '2025-10-12', 'D03', 'payé', 18.00),
+(4, 46, '2025-10-29', 'D04', 'payé', 30.00),
+(5, 47, '2025-11-16', 'D05', 'payé', 55.00),
+(6, 48, '2025-10-29', 'D06', 'payé', 28.00),
+(7, 49, '2025-11-03', 'D07', 'payé', 26.00),
+(8, 50, '2025-10-13', 'D08', 'payé', 20.00),
+(9, 1, '2025-11-19', 'D09', 'payé', 40.00),
+(10, 2, '2025-10-30', 'D10', 'payé', 32.00),
+(1, 3, '2025-10-18', 'E01', 'payé', 25.00),
+(2, 4, '2025-11-09', 'E02', 'payé', 45.00),
+(3, 5, '2025-10-12', 'E03', 'payé', 18.00),
+(4, 6, '2025-10-27', 'E04', 'payé', 30.00),
+(5, 7, '2025-11-13', 'E05', 'payé', 55.00),
+(6, 8, '2025-10-24', 'E06', 'payé', 28.00),
+(7, 9, '2025-11-02', 'E07', 'payé', 26.00),
+(8, 10, '2025-10-10', 'E08', 'payé', 20.00),
+(9, 11, '2025-11-18', 'E09', 'payé', 40.00),
+(10, 12, '2025-10-29', 'E10', 'payé', 32.00),
+(1, 13, '2025-10-17', 'F01', 'payé', 25.00),
+(2, 14, '2025-11-08', 'F02', 'payé', 45.00),
+(3, 15, '2025-10-11', 'F03', 'payé', 18.00),
+(4, 16, '2025-10-26', 'F04', 'payé', 30.00),
+(5, 17, '2025-11-12', 'F05', 'payé', 55.00),
+(6, 18, '2025-10-23', 'F06', 'payé', 28.00),
+(7, 19, '2025-11-01', 'F07', 'payé', 26.00),
+(8, 20, '2025-10-09', 'F08', 'payé', 20.00),
+(9, 21, '2025-11-17', 'F09', 'payé', 40.00),
+(10, 22, '2025-10-28', 'F10', 'payé', 32.00),
+(1, 23, '2025-10-16', 'G01', 'payé', 25.00),
+(2, 24, '2025-11-07', 'G02', 'payé', 45.00),
+(3, 25, '2025-10-10', 'G03', 'payé', 18.00),
+(4, 26, '2025-10-25', 'G04', 'payé', 30.00),
+(5, 27, '2025-11-11', 'G05', 'payé', 55.00),
+(6, 28, '2025-10-22', 'G06', 'payé', 28.00),
+(7, 29, '2025-11-01', 'G07', 'payé', 26.00),
+(8, 30, '2025-10-08', 'G08', 'payé', 20.00),
+(9, 31, '2025-11-16', 'G09', 'payé', 40.00),
+(10, 32, '2025-10-27', 'G10', 'payé', 32.00);
