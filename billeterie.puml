@@ -1,3 +1,4 @@
+```puml
 @startuml
 
 entity "Salle" as salle {
@@ -19,7 +20,6 @@ entity "Spectacle" as spectacle {
   langue : VARCHAR
   age_minimum : INT
   date_evenement : DATE
-  categorie : VARCHAR
 }
 
 entity "Photo" as photo {
@@ -68,3 +68,4 @@ spectacle "1" ||--o{ "0..*" photo : a"
 spectacle "1" ||--o{ "1..*" seance : propose"
 
 @enduml
+```
