@@ -1,4 +1,4 @@
-```puml
+puml
 @startuml
 
 entity "Salle" as salle {
@@ -68,4 +68,3 @@ spectacle "1" ||--o{ "0..*" photo : a"
 spectacle "1" ||--o{ "1..*" seance : propose"
 
 @enduml
-```
