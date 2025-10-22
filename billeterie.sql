@@ -1,36 +1,65 @@
-CREATE DATABASE IF NOT EXISTS tp_billetterie;
-USE tp_billetterie;
-
-CREATE TABLE Venue (
-    venue_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    city VARCHAR(50),
-    capacity INT
+CREATE TABLE Salle (
+  id_salle INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(100) NOT NULL,
+  ville VARCHAR(100) NOT NULL,
+  capacite INT NOT NULL
 );
 
-CREATE TABLE Event (
-    event_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(100),
-    date DATE,
-    venue_id INT,
-    category VARCHAR(50),
-    price_eur DECIMAL(6,2)
+CREATE TABLE Spectacle (
+  id_spectacle INT AUTO_INCREMENT PRIMARY KEY,
+  id_salle INT NOT NULL,
+  titre VARCHAR(150) NOT NULL,
+  affiche VARCHAR(255) NOT NULL,
+  tags VARCHAR(255),
+  duree INT NOT NULL,
+  description_courte TEXT NOT NULL,
+  description_longue TEXT NOT NULL,
+  langue VARCHAR(50) NOT NULL,
+  age_minimum INT,
+  date_evenement DATE NOT NULL,
+  FOREIGN KEY (id_salle) REFERENCES Salle(id_salle)
+);
+
+CREATE TABLE Photo (
+  id_photo INT AUTO_INCREMENT PRIMARY KEY,
+  id_spectacle INT NOT NULL,
+  photo VARCHAR(255) NOT NULL,
+  FOREIGN KEY (id_spectacle) REFERENCES Spectacle(id_spectacle)
+);
+
+CREATE TABLE Seance (
+  id_seance INT AUTO_INCREMENT PRIMARY KEY,
+  id_spectacle INT NOT NULL,
+  date_heure DATETIME NOT NULL,
+  prix DECIMAL(8,2) NOT NULL,
+  FOREIGN KEY (id_spectacle) REFERENCES Spectacle(id_spectacle)
 );
 
 CREATE TABLE Client (
-    client_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100),
-    city VARCHAR(50)
+  id_client INT AUTO_INCREMENT PRIMARY KEY,
+  prenom VARCHAR(100) NOT NULL,
+  nom VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  adresse VARCHAR(255) NOT NULL,
+  num_tel VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Ticket (
-    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
-    event_id INT,
-    client_id INT,
-    purchase_date DATE,
-    seat VARCHAR(20),
-    status VARCHAR(20),
-    price_paid DECIMAL(6,2)
+CREATE TABLE Historique (
+  id_client INT NOT NULL,
+  id_spectacle INT NOT NULL,
+  PRIMARY KEY (id_client, id_spectacle),
+  FOREIGN KEY (id_client) REFERENCES Client(id_client)
+  FOREIGN KEY (id_spectacle) REFERENCES Spectacle(id_spectacle)
+);
+
+CREATE TABLE Billet (
+  id_billet INT AUTO_INCREMENT PRIMARY KEY,
+  id_spectacle INT NOT NULL,
+  id_client INT NOT NULL,
+  date_achat DATE NOT NULL,
+  place VARCHAR(50),
+  statut VARCHAR(50),
+  prix_paye DECIMAL(8,2) NOT NULL,
+  FOREIGN KEY (id_spectacle) REFERENCES Spectacle(id_spectacle)
+  FOREIGN KEY (id_client) REFERENCES Client(id_client)
 );
