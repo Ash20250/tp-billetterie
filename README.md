@@ -44,13 +44,13 @@ TP 2 : Benchmark des frameworks Java
 
 Avant de commencer à coder l’interface graphique, j’ai pris le temps de choisir le framework Java le plus adapté pour mon projet. Pour ça, j’ai comparé plusieurs options :
 
-JavaFX → moderne, complet et parfait pour créer des applications desktop.
+JavaFX -> moderne, complet et parfait pour créer des applications desktop.
 
-Swing → simple et rapide, pratique si je voulais juste prototyper ou tester quelque chose.
+Swing -> simple et rapide, pratique si je voulais juste prototyper ou tester quelque chose.
 
-SWT → très performant, mais un peu compliqué à installer et à prendre en main.
+SWT -> très performant, mais un peu compliqué à installer et à prendre en main.
 
-Vaadin → orienté web, donc moins adapté pour une application desktop classique.
+Vaadin -> orienté web, donc moins adapté pour une application desktop classique.
 
 Pour faire mon choix, j’ai regardé plusieurs critères : la facilité d’installation, la documentation, la rapidité d’apprentissage, l’intégration avec Java, le rendu visuel, l’organisation du code, la communauté et les performances.
 
