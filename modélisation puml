@@ -1,0 +1,70 @@
+puml
+@startuml
+
+entity "Salle" as salle {
+  id_salle : INT <<PK>>
+  nom : VARCHAR
+  ville : VARCHAR
+  capacite : INT
+}
+
+entity "Spectacle" as spectacle {
+  id_spectacle : INT <<PK>>
+  id_salle : INT <<FK>>
+  titre : VARCHAR
+  affiche : VARCHAR
+  tags : VARCHAR
+  duree : INT
+  description_courte : TEXT
+  description_longue : TEXT
+  langue : VARCHAR
+  age_minimum : INT
+  date_evenement : DATE
+}
+
+entity "Photo" as photo {
+  id_photo : <<PK>>
+  id_spectacle : INT <<FK>>
+  photo : VARCHAR
+}
+
+entity "Seance" as seance {
+  id_seance : INT <<PK>>
+  id_spectacle : INT <<FK>>
+  date_heure : DATETIME
+  prix : DECIMAL
+}
+
+entity "Client" as client {
+  id_client : INT <<PK>>
+  prenom : VARCHAR
+  nom : VARCHAR
+  email : VARCHAR
+  adresse : VARCHAR
+  num_tel : INT
+}
+
+entity "Historique" as historique {
+  id_client : INT <<FK>>
+  id_spectacle : INT <<FK>>
+}
+
+entity "Billet" as billet {
+  id_billet : INT <<PK>>
+  id_spectacle : INT <<FK>>
+  id_client : INT <<FK>>
+  date_achat : DATE
+  place : VARCHAR
+  statut : VARCHAR
+  prix_paye : DECIMAL
+}
+
+spectacle ||--o{ historique
+client ||--o{ historique
+spectacle "1"||--o{ "*" billet : pour"
+client "1" ||--o{ "0..*" billet : possède"
+salle "1" ||--o{ "*" spectacle : accueille"
+spectacle "1" ||--o{ "0..*" photo : a"
+spectacle "1" ||--o{ "1..*" seance : propose"
+
+@enduml
