@@ -1,0 +1,72 @@
+package view;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.Database;
+import model.Spectacle;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class AchatBilletView {
+    private Spectacle spectacle;
+
+    public AchatBilletView(Spectacle spectacle) {
+        this.spectacle = spectacle;
+    }
+
+    public void show() {
+        if (spectacle == null) {
+            System.out.println("Erreur : aucun spectacle sélectionné.");
+            return;
+        }
+
+        Stage stage = new Stage();
+        VBox root = new VBox(15);
+        root.setPadding(new Insets(20));
+        root.setAlignment(Pos.CENTER);
+
+        Label titreLabel = new Label("Acheter un billet pour : " + spectacle.getTitre());
+        Label quantiteLabel = new Label("Nombre de billets :");
+        Spinner<Integer> quantiteSpinner = new Spinner<>(1, 10, 1);
+
+        Button confirmerBtn = new Button("Confirmer l'achat");
+        confirmerBtn.setOnAction(e -> {
+            int nbBillets = quantiteSpinner.getValue();
+            try (Connection conn = Database.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(
+                         "INSERT INTO billet (id_spectacle, date_achat, place, statut, prix_paye) VALUES (?, NOW(), ?, 'acheté', ?)")) {
+
+                for (int i = 1; i <= nbBillets; i++) {
+                    ps.setInt(1, spectacle.getId());
+                    ps.setString(2, "Place " + i);
+                    ps.setDouble(3, spectacle.getPrix());
+                    ps.executeUpdate();
+                }
+
+                System.out.println("Achat de " + nbBillets + " billet(s) pour : " + spectacle.getTitre());
+                stage.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        Button annulerBtn = new Button("Annuler");
+        annulerBtn.setOnAction(e -> stage.close());
+
+        root.getChildren().addAll(titreLabel, quantiteLabel, quantiteSpinner, confirmerBtn, annulerBtn);
+
+        Scene scene = new Scene(root, 350, 250);
+        stage.setScene(scene);
+        stage.setTitle("Achat billet");
+        stage.show();
+    }
+}
