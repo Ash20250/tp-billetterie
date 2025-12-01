@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.9"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.ListeSpectaclesViewController"
+      spacing="10" alignment="CENTER" style="-fx-padding:20;"
+      stylesheets="@style.css">
+
+    <Label text="Liste des Spectacles" style="-fx-font-size:18; -fx-font-weight:bold;"/>
+
+    <TableView fx:id="tableSpectacles" prefHeight="400" prefWidth="600">
+        <columns>
+            <TableColumn fx:id="colNom" text="Nom du spectacle" prefWidth="200"/>
+            <TableColumn fx:id="colSalle" text="Salle" prefWidth="150"/>
+            <TableColumn fx:id="colDate" text="Date" prefWidth="100"/>
+            <TableColumn fx:id="colHeure" text="Heure" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button fx:id="btnPrev" text="Précédent" onAction="#goToPreviousPage"/>
+        <Button fx:id="btnNext" text="Suivant" onAction="#goToNextPage"/>
+        <Button fx:id="btnDetails" text="Voir détails" onAction="#showDetails"/>
+        <Button fx:id="btnAcheter" text="Acheter billet" onAction="#acheterBillet"/>
+    </HBox>
+</VBox>
