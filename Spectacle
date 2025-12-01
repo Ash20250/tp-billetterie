@@ -1,69 +1,61 @@
 package model;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Spectacle {
-    private int id;
+    private int id_spectacle;
     private String titre;
-    private String salle;
-    private String date;
-    private double prix;
+    private LocalDate date_spectacle;
+    private LocalTime heure_spectacle;
+    private Salle salle;
+    private int duree;
+    private String langue;
+    private int age_minimum;
 
-    public Spectacle(int id, String titre, String salle, String date, double prix) {
-        this.id = id;
+    public Spectacle(int id_spectacle, String titre, LocalDate date_spectacle, LocalTime heure_spectacle,
+                     Salle salle, int duree, String langue, int age_minimum) {
+        this.id_spectacle = id_spectacle;
         this.titre = titre;
+        this.date_spectacle = date_spectacle;
+        this.heure_spectacle = heure_spectacle;
         this.salle = salle;
-        this.date = date;
-        this.prix = prix;
+        this.duree = duree;
+        this.langue = langue;
+        this.age_minimum = age_minimum;
     }
 
-    public int getId() { return id; }
+    public int getId_spectacle() { return id_spectacle; }
     public String getTitre() { return titre; }
-    public String getSalle() { return salle; }
-    public String getDate() { return date; }
-    public double getPrix() { return prix; }
 
-    public static List<Spectacle> getAll() {
-        List<Spectacle> spectacles = new ArrayList<>();
-        try (Connection conn = Database.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(
-                     "SELECT s.id_spectacle, s.titre, sl.nom AS salle, s.date_evenement, s.prix " +
-                             "FROM spectacle s JOIN salle sl ON s.id_salle = sl.id_salle")) {
+    public String getNom() { return titre; }
+    public String getNom_spectacle() { return titre; }
 
-            while (rs.next()) {
-                spectacles.add(new Spectacle(
-                        rs.getInt("id_spectacle"),
-                        rs.getString("titre"),
-                        rs.getString("salle"),
-                        rs.getString("date_evenement"),
-                        rs.getDouble("prix")
-                ));
-            }
+    public LocalDate getDate_spectacle() { return date_spectacle; }
+    public LocalTime getHeure_spectacle() { return heure_spectacle; }
+    public Salle getSalle() { return salle; }
+    public int getDuree() { return duree; }
+    public String getLangue() { return langue; }
+    public int getAge_minimum() { return age_minimum; }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return spectacles;
-    }
+    public void setTitre(String titre) { this.titre = titre; }
+    public void setNom(String nom) { this.titre = nom; }
+    public void setNom_spectacle(String nom) { this.titre = nom; }
+    public void setDate_spectacle(LocalDate date_spectacle) { this.date_spectacle = date_spectacle; }
+    public void setHeure_spectacle(LocalTime heure_spectacle) { this.heure_spectacle = heure_spectacle; }
+    public void setSalle(Salle salle) { this.salle = salle; }
+    public void setDuree(int duree) { this.duree = duree; }
+    public void setLangue(String langue) { this.langue = langue; }
+    public void setAge_minimum(int age_minimum) { this.age_minimum = age_minimum; }
 
-    public static void main(String[] args) {
-        List<Spectacle> spectacles = getAll();
-        if (spectacles.isEmpty()) {
-            System.out.println("Aucun spectacle trouvé !");
-        } else {
-            System.out.println("Liste des spectacles :");
-            for (Spectacle s : spectacles) {
-                System.out.println(
-                        s.getId() + " | " +
-                                s.getTitre() + " | " +
-                                s.getSalle() + " | " +
-                                s.getDate() + " | " +
-                                s.getPrix()
-                );
-            }
-        }
+    @Override
+    public String toString() {
+        String dateStr = (date_spectacle != null) ? date_spectacle.toString() : "date inconnue";
+        String heureStr = (heure_spectacle != null) ? heure_spectacle.toString() : "heure inconnue";
+        String salleStr = (salle != null) ? salle.getNom_salle() : "salle inconnue";
+
+        return titre + " - " + dateStr + " à " + heureStr +
+                " (" + salleStr + ") - durée : " + duree + " min - langue : " + langue +
+                " - âge minimum : " + age_minimum + " ans";
     }
 }
