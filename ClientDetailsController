@@ -1,0 +1,33 @@
+package src.main.ressources.view;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import model.Client;
+
+public class ClientDetailsController {
+
+    @FXML private Label lblNom;
+    @FXML private Label lblPrenom;
+    @FXML private Label lblEmail;
+    @FXML private Label lblTelephone;
+    @FXML private Label lblAge;
+    @FXML private Label lblAdresse;
+
+    private Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+        afficherDetails();
+    }
+
+    private void afficherDetails() {
+        if (client != null) {
+            lblNom.setText(client.getNom());
+            lblPrenom.setText(client.getPrenom());
+            lblEmail.setText(client.getEmail());
+            lblTelephone.setText(client.getNumTel());
+            lblAge.setText(String.valueOf(client.getAge()));
+            lblAdresse.setText(client.getAdresse());
+        }
+    }
+}
