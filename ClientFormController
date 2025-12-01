@@ -36,7 +36,7 @@ public class ClientFormController {
             fieldNom.setText(client.getNom());
             fieldEmail.setText(client.getEmail());
             fieldAdresse.setText(client.getAdresse());
-            fieldNumTel.setText(client.getNumTel()); // ✅ String
+            fieldNumTel.setText(client.getNumTel());
         }
     }
 
@@ -54,8 +54,7 @@ public class ClientFormController {
         String nom = fieldNom.getText();
         String email = fieldEmail.getText();
         String adresse = fieldAdresse.getText();
-        String numTel = fieldNumTel.getText(); // ✅ directement String
-
+        String numTel = fieldNumTel.getText(); 
         if (existingClient == null) {
             Client c = new Client(0, nom, prenom, email, numTel, 0, adresse);
             clientDAO.addClient(c);
@@ -65,7 +64,7 @@ public class ClientFormController {
             existingClient.setNom(nom);
             existingClient.setEmail(email);
             existingClient.setAdresse(adresse);
-            existingClient.setNumTel(numTel); // ✅ String
+            existingClient.setNumTel(numTel); 
             clientDAO.updateClient(existingClient);
             showInfo("Client modifié.");
         }
