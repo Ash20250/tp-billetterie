@@ -1,0 +1,61 @@
+package model;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Spectacle {
+    private int id_spectacle;
+    private String titre;
+    private LocalDate date_spectacle;
+    private LocalTime heure_spectacle;
+    private Salle salle;
+    private int duree;
+    private String langue;
+    private int age_minimum;
+
+    public Spectacle(int id_spectacle, String titre, LocalDate date_spectacle, LocalTime heure_spectacle,
+                     Salle salle, int duree, String langue, int age_minimum) {
+        this.id_spectacle = id_spectacle;
+        this.titre = titre;
+        this.date_spectacle = date_spectacle;
+        this.heure_spectacle = heure_spectacle;
+        this.salle = salle;
+        this.duree = duree;
+        this.langue = langue;
+        this.age_minimum = age_minimum;
+    }
+
+    public int getId_spectacle() { return id_spectacle; }
+    public String getTitre() { return titre; }
+
+    public String getNom() { return titre; }
+    public String getNom_spectacle() { return titre; }
+
+    public LocalDate getDate_spectacle() { return date_spectacle; }
+    public LocalTime getHeure_spectacle() { return heure_spectacle; }
+    public Salle getSalle() { return salle; }
+    public int getDuree() { return duree; }
+    public String getLangue() { return langue; }
+    public int getAge_minimum() { return age_minimum; }
+
+    public void setTitre(String titre) { this.titre = titre; }
+    public void setNom(String nom) { this.titre = nom; }
+    public void setNom_spectacle(String nom) { this.titre = nom; }
+    public void setDate_spectacle(LocalDate date_spectacle) { this.date_spectacle = date_spectacle; }
+    public void setHeure_spectacle(LocalTime heure_spectacle) { this.heure_spectacle = heure_spectacle; }
+    public void setSalle(Salle salle) { this.salle = salle; }
+    public void setDuree(int duree) { this.duree = duree; }
+    public void setLangue(String langue) { this.langue = langue; }
+    public void setAge_minimum(int age_minimum) { this.age_minimum = age_minimum; }
+
+    @Override
+    public String toString() {
+        String dateStr = (date_spectacle != null) ? date_spectacle.toString() : "date inconnue";
+        String heureStr = (heure_spectacle != null) ? heure_spectacle.toString() : "heure inconnue";
+        String salleStr = (salle != null) ? salle.getNom_salle() : "salle inconnue";
+
+        return titre + " - " + dateStr + " à " + heureStr +
+                " (" + salleStr + ") - durée : " + duree + " min - langue : " + langue +
+                " - âge minimum : " + age_minimum + " ans";
+    }
+}
