@@ -5,23 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private static final String URL = "jdbc:mysql://localhost:3306/tp_billeterie";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/tp_billetterie?serverTimezone=UTC";
+    private static final String USER = "root"; // adapte si besoin
+    private static final String PASSWORD = ""; // adapte si besoin
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
-
-    public static void main(String[] args) {
-        try (Connection conn = getConnection()) {
-            if (conn != null && !conn.isClosed()) {
-                System.out.println("Connexion OK !");
-            } else {
-                System.out.println("Connexion échouée...");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver MySQL introuvable", e);
         }
+
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
