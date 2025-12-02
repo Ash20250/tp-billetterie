@@ -23,7 +23,6 @@ public class SpectacleDetailsViewController {
 
     private Spectacle spectacle;
 
-    // Méthode appelée depuis ListeSpectaclesViewController
     public void setSpectacle(Spectacle spectacle) {
         this.spectacle = spectacle;
         populateFields();
@@ -44,7 +43,7 @@ public class SpectacleDetailsViewController {
                 spectacle.getSalle() != null ? nullSafe(spectacle.getSalle().getNom_salle()) : ""
         );
 
-        Object duree = spectacle.getDuree(); // adapte selon ton modèle
+        Object duree = spectacle.getDuree(); 
         lblDuree.setText(duree != null ? duree.toString() : "");
 
         lblLangue.setText(nullSafe(spectacle.getLangue()));
