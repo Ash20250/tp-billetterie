@@ -1,0 +1,87 @@
+package view;
+
+import dao.ClientDAO;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import model.Client;
+
+public class ClientFormController {
+
+    @FXML private TextField fieldPrenom;
+    @FXML private TextField fieldNom;
+    @FXML private TextField fieldEmail;
+    @FXML private TextField fieldAdresse;
+    @FXML private TextField fieldNumTel;
+    @FXML private Button btnValider;
+
+    private ClientDAO clientDAO;
+    private Client existingClient;
+    private Runnable onSaved;
+
+    @FXML
+    public void initialize() {
+        btnValider.setOnAction(e -> save());
+    }
+
+    public void setClientDAO(ClientDAO dao) {
+        this.clientDAO = dao;
+    }
+
+    public void setExistingClient(Client client) {
+        this.existingClient = client;
+        if (client != null) {
+            fieldPrenom.setText(client.getPrenom());
+            fieldNom.setText(client.getNom());
+            fieldEmail.setText(client.getEmail());
+            fieldAdresse.setText(client.getAdresse());
+            fieldNumTel.setText(client.getNumTel());
+        }
+    }
+
+    public void setOnSaved(Runnable onSaved) {
+        this.onSaved = onSaved;
+    }
+
+    private void save() {
+        if (clientDAO == null) {
+            showError("DAO non initialisé.");
+            return;
+        }
+
+        String prenom = fieldPrenom.getText();
+        String nom = fieldNom.getText();
+        String email = fieldEmail.getText();
+        String adresse = fieldAdresse.getText();
+        String numTel = fieldNumTel.getText(); 
+        if (existingClient == null) {
+            Client c = new Client(0, nom, prenom, email, numTel, 0, adresse);
+            clientDAO.addClient(c);
+            showInfo("Client ajouté.");
+        } else {
+            existingClient.setPrenom(prenom);
+            existingClient.setNom(nom);
+            existingClient.setEmail(email);
+            existingClient.setAdresse(adresse);
+            existingClient.setNumTel(numTel); 
+            clientDAO.updateClient(existingClient);
+            showInfo("Client modifié.");
+        }
+
+        if (onSaved != null) onSaved.run();
+        btnValider.getScene().getWindow().hide();
+    }
+
+    private void showInfo(String msg) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION, msg);
+        a.setHeaderText(null);
+        a.showAndWait();
+    }
+
+    private void showError(String msg) {
+        Alert a = new Alert(Alert.AlertType.ERROR, msg);
+        a.setHeaderText("Erreur");
+        a.showAndWait();
+    }
+}
