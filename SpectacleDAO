@@ -16,7 +16,7 @@ public class SpectacleDAO {
     public List<Spectacle> getAllSpectacles() {
         List<Spectacle> spectacles = new ArrayList<>();
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT id_spectacle, id_salle, titre, duree, langue FROM spectacle";
+            String sql = "SELECT id_spectacle, id_salle, titre, date_spectacle, heure_spectacle, duree, langue, age_minimum FROM spectacle";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -25,12 +25,12 @@ public class SpectacleDAO {
                 Spectacle spectacle = new Spectacle(
                         rs.getInt("id_spectacle"),
                         rs.getString("titre"),
-                        null,
-                        null,
+                        (rs.getDate("date_spectacle") != null) ? rs.getDate("date_spectacle").toLocalDate() : null,
+                        (rs.getTime("heure_spectacle") != null) ? rs.getTime("heure_spectacle").toLocalTime() : null,
                         salle,
                         rs.getInt("duree"),
                         rs.getString("langue"),
-                        0
+                        rs.getInt("age_minimum")
                 );
                 spectacles.add(spectacle);
             }
@@ -43,7 +43,7 @@ public class SpectacleDAO {
     public Spectacle getSpectacleById(int id) {
         Spectacle spectacle = null;
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT id_spectacle, id_salle, titre, duree, langue FROM spectacle WHERE id_spectacle = ?";
+            String sql = "SELECT id_spectacle, id_salle, titre, date_spectacle, heure_spectacle, duree, langue, age_minimum FROM spectacle WHERE id_spectacle = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -53,12 +53,12 @@ public class SpectacleDAO {
                 spectacle = new Spectacle(
                         rs.getInt("id_spectacle"),
                         rs.getString("titre"),
-                        null,
-                        null,
+                        (rs.getDate("date_spectacle") != null) ? rs.getDate("date_spectacle").toLocalDate() : null,
+                        (rs.getTime("heure_spectacle") != null) ? rs.getTime("heure_spectacle").toLocalTime() : null,
                         salle,
                         rs.getInt("duree"),
                         rs.getString("langue"),
-                        0
+                        rs.getInt("age_minimum")
                 );
             }
         } catch (Exception e) {
@@ -69,12 +69,15 @@ public class SpectacleDAO {
 
     public void addSpectacle(Spectacle spectacle) {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO spectacle (id_salle, titre, duree, langue) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO spectacle (id_salle, titre, date_spectacle, heure_spectacle, duree, langue, age_minimum) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, spectacle.getSalle().getId_salle());
             stmt.setString(2, spectacle.getTitre());
-            stmt.setInt(3, spectacle.getDuree());
-            stmt.setString(4, spectacle.getLangue());
+            stmt.setDate(3, java.sql.Date.valueOf(spectacle.getDate_spectacle()));
+            stmt.setTime(4, java.sql.Time.valueOf(spectacle.getHeure_spectacle()));
+            stmt.setInt(5, spectacle.getDuree());
+            stmt.setString(6, spectacle.getLangue());
+            stmt.setInt(7, spectacle.getAge_minimum());
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erreur addSpectacle : " + e.getMessage());
@@ -83,13 +86,16 @@ public class SpectacleDAO {
 
     public void updateSpectacle(Spectacle spectacle) {
         try (Connection conn = DBConnection.getConnection()) {
-            String sql = "UPDATE spectacle SET id_salle=?, titre=?, duree=?, langue=? WHERE id_spectacle=?";
+            String sql = "UPDATE spectacle SET id_salle=?, titre=?, date_spectacle=?, heure_spectacle=?, duree=?, langue=?, age_minimum=? WHERE id_spectacle=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, spectacle.getSalle().getId_salle());
             stmt.setString(2, spectacle.getTitre());
-            stmt.setInt(3, spectacle.getDuree());
-            stmt.setString(4, spectacle.getLangue());
-            stmt.setInt(5, spectacle.getId_spectacle());
+            stmt.setDate(3, java.sql.Date.valueOf(spectacle.getDate_spectacle()));
+            stmt.setTime(4, java.sql.Time.valueOf(spectacle.getHeure_spectacle()));
+            stmt.setInt(5, spectacle.getDuree());
+            stmt.setString(6, spectacle.getLangue());
+            stmt.setInt(7, spectacle.getAge_minimum());
+            stmt.setInt(8, spectacle.getId_spectacle());
             stmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("Erreur updateSpectacle : " + e.getMessage());
