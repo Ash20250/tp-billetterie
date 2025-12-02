@@ -1,49 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="src.main.ressources.view.ClientListController"
-            stylesheets="@style.css">
+<VBox xmlns="http://javafx.com/javafx/21.0.9"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.ClientListController"
+      spacing="10" alignment="CENTER" style="-fx-padding:20;"
+      stylesheets="@style.css">
 
-    <top>
-        <HBox spacing="8">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <TextField fx:id="searchField" promptText="Rechercher par nom..." />
-            <Button fx:id="searchButton" text="Rechercher" />
-            <Button fx:id="refreshButton" text="Actualiser" />
-        </HBox>
-    </top>
+    <Label text="Liste des Clients" style="-fx-font-size:18; -fx-font-weight:bold;"/>
 
-    <center>
-        <TableView fx:id="tableClients">
-            <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="60" />
-                <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="120" />
-                <TableColumn fx:id="colNom" text="Nom" prefWidth="140" />
-                <TableColumn fx:id="colEmail" text="Email" prefWidth="200" />
-                <TableColumn fx:id="colAdresse" text="Adresse" prefWidth="200" />
-                <TableColumn fx:id="colNumTel" text="Téléphone" prefWidth="120" />
-            </columns>
-        </TableView>
-    </center>
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Rechercher par nom ou prénom" prefWidth="300"/>
+        <Button fx:id="searchButton" text="Rechercher"/>
+        <Button fx:id="refreshButton" text="Rafraîchir"/>
+    </HBox>
 
-    <bottom>
-        <HBox spacing="8">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Button fx:id="addButton" text="Ajouter" />
-            <Button fx:id="editButton" text="Modifier" />
-            <Button fx:id="deleteButton" text="Supprimer" />
-            <Button fx:id="detailsButton" text="Voir profil" />
-        </HBox>
-    </bottom>
+    <TableView fx:id="tableClients" prefHeight="400" prefWidth="700">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colPrenom" text="Prénom" prefWidth="120"/>
+            <TableColumn fx:id="colNom" text="Nom" prefWidth="120"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
+            <TableColumn fx:id="colAdresse" text="Adresse" prefWidth="150"/>
+            <TableColumn fx:id="colNumTel" text="Téléphone" prefWidth="120"/>
+        </columns>
+    </TableView>
 
-</BorderPane>
+    <HBox spacing="10">
+        <Button fx:id="addButton" text="Ajouter"/>
+        <Button fx:id="editButton" text="Modifier"/>
+        <Button fx:id="deleteButton" text="Supprimer"/>
+        <Button fx:id="detailsButton" text="Détails"/>
+    </HBox>
+</VBox>
