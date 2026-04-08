@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="20.0" prefHeight="450.0" prefWidth="400.0"
+      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="view.LoginViewController" style="-fx-background-color: #f4f4f4;">
+
+    <Text text="Connexion" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="10" maxWidth="250">
+        <Label text="Email :"/>
+        <TextField fx:id="txtEmail" promptText="votre@email.com"/>
+
+        <Label text="Mot de passe :"/>
+        <PasswordField fx:id="txtPassword" promptText="****"/>
+    </VBox>
+
+    <Button text="Se connecter" onAction="#handleLogin"
+            style="-fx-background-color: #0078d7; -fx-text-fill: white; -fx-padding: 10 20; -fx-cursor: hand;"/>
+
+    <Hyperlink text="Pas encore de compte ? S'inscrire ici" onAction="#goToInscription" style="-fx-text-fill: #0078d7;"/>
+
+</VBox>

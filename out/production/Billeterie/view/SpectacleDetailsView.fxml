@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.9"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.SpectacleDetailsViewController"
+      spacing="10" style="-fx-padding:20;">
+
+    <Label fx:id="lblTitre" text="Titre"/>
+    <Label fx:id="lblDate" text="Date"/>
+    <Label fx:id="lblHeure" text="Heure"/>
+    <Label fx:id="lblSalle" text="Salle"/>
+    <Label fx:id="lblDuree" text="Durée"/>
+    <Label fx:id="lblLangue" text="Langue"/>
+
+    <Button text="Voir clients" onAction="#handleOpenClientList"/>
+</VBox>

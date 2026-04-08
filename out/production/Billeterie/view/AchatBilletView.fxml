@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.9"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.AchatBilletViewController"
+      spacing="10" alignment="CENTER_LEFT" style="-fx-padding:20;"
+      stylesheets="@style.css">
+
+    <Label text="Client :" />
+    <ComboBox fx:id="comboClient" promptText="Sélectionner un client" />
+
+    <Label text="Spectacle :" />
+    <ComboBox fx:id="comboSpectacle" promptText="Sélectionner un spectacle" />
+
+    <Label text="Place :" />
+    <TextField fx:id="fieldPlace" promptText="Ex: A12" />
+
+    <Label text="Statut :" />
+    <ComboBox fx:id="comboStatut" promptText="Choisir un statut" />
+
+    <Label text="Prix payé (€) :" />
+    <TextField fx:id="fieldPrix" promptText="Ex: 45.00" />
+
+    <Button fx:id="btnAcheter" text="Acheter billet" onAction="#acheterBillet"/>
+</VBox>
