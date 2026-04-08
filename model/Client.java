@@ -1,0 +1,51 @@
+package model;
+
+public class Client {
+    private int id_client;
+    private String nom;
+    private String prenom;
+    private String email;
+    private String numTel;
+    private int age;
+    private String adresse;
+    private String role; // AJOUT : Il manquait cette variable
+
+    public Client(int id_client, String nom, String prenom, String email, String numTel, int age, String adresse) {
+        this.id_client = id_client;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.numTel = numTel;
+        this.age = age;
+        this.adresse = adresse;
+        this.role = "CLIENT"; // Valeur par défaut
+    }
+
+    public Client(int id_client, String nom, String prenom, String email) {
+        this(id_client, nom, prenom, email, "", 0, "");
+    }
+
+    // --- GETTERS ---
+    public int getId_client() { return id_client; }
+    public String getNom() { return nom; }
+    public String getPrenom() { return prenom; }
+    public String getEmail() { return email; }
+    public String getNumTel() { return numTel; }
+    public int getAge() { return age; }
+    public String getAdresse() { return adresse; }
+    public String getRole() { return role; } // AJOUT : Indispensable pour LoginViewController
+
+    // --- SETTERS ---
+    public void setNom(String nom) { this.nom = nom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public void setEmail(String email) { this.email = email; }
+    public void setNumTel(String numTel) { this.numTel = numTel; }
+    public void setAge(int age) { this.age = age; }
+    public void setAdresse(String adresse) { this.adresse = adresse; }
+    public void setRole(String role) { this.role = role; } // AJOUT : Indispensable pour ClientDAO
+
+    @Override
+    public String toString() {
+        return prenom + " " + nom + " (" + role + ")";
+    }
+}

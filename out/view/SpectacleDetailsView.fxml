@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="view.SpectacleDetailsViewController" spacing="10">
+    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+    <Label text="Détails du Spectacle" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+    <GridPane hgap="10" vgap="10">
+        <Label text="Titre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="lblTitre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Salle:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label fx:id="lblSalle" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label fx:id="lblDate" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+    <Button text="Acheter un billet" fx:id="btnAcheter"/>
+</VBox>
