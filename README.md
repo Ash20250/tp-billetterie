@@ -34,3 +34,4 @@ Réalisation des vues ergonomiques via **Scene Builder** :
 - **Gestionnaire de dépendances :** Maven / Gradle.
 
 ## 📊 Modélisation
+<img width="462" height="563" alt="image" src="https://github.com/user-attachments/assets/fc0de30b-88db-4572-b9f4-d0a59b53e7b0" />
