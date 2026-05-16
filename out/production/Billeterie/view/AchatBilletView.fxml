@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
+<VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20; -fx-background-color: white;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="view.AchatBilletViewController">
 
-<VBox xmlns="http://javafx.com/javafx/21.0.9"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="view.AchatBilletViewController"
-      spacing="10" alignment="CENTER_LEFT" style="-fx-padding:20;"
-      stylesheets="@style.css">
+    <Label text="🎟️ Choix des places &amp; Paiement" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-    <Label text="Client :" />
-    <ComboBox fx:id="comboClient" promptText="Sélectionner un client" />
+    <HBox spacing="20" alignment="CENTER">
+        <GridPane hgap="10" vgap="10">
+            <Label text="Client :" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <ComboBox fx:id="comboClient" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
-    <Label text="Spectacle :" />
-    <ComboBox fx:id="comboSpectacle" promptText="Sélectionner un spectacle" />
+            <Label text="Spectacle :" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <ComboBox fx:id="comboSpectacle" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1" />
 
-    <Label text="Place :" />
-    <TextField fx:id="fieldPlace" promptText="Ex: A12" />
+            <Label text="Places choisies :" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <TextField fx:id="fieldPlace" promptText="Cliquez sur les sièges" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1" />
 
-    <Label text="Statut :" />
-    <ComboBox fx:id="comboStatut" promptText="Choisir un statut" />
+            <Label text="Statut :" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+            <ComboBox fx:id="comboStatut" prefWidth="200" GridPane.rowIndex="3" GridPane.columnIndex="1" />
 
-    <Label text="Prix payé (€) :" />
-    <TextField fx:id="fieldPrix" promptText="Ex: 45.00" />
+            <Label text="Total :" GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
+            <Label fx:id="lblPrixTotal" text="0.00 €" style="-fx-text-fill: #e67e22; -fx-font-size: 18; -fx-font-weight: bold;"
+                   GridPane.rowIndex="4" GridPane.columnIndex="1" />
 
-    <Button fx:id="btnAcheter" text="Acheter billet" onAction="#acheterBillet"/>
+            <Button fx:id="btnAcheter" text="Confirmer l'achat" onAction="#acheterBillet" prefWidth="200"
+                    style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14;"
+                    GridPane.rowIndex="5" GridPane.columnSpan="2" />
+        </GridPane>
+
+        <VBox spacing="10" alignment="CENTER" style="-fx-border-color: #ecf0f1; -fx-border-width: 1; -fx-padding: 10;">
+            <Label text="--- SCÈNE ---" style="-fx-text-fill: #7f8c8d; -fx-font-weight: bold;"/>
+            <ScrollPane prefHeight="250" prefWidth="350" style="-fx-background-color: transparent;">
+                <GridPane fx:id="gridSalle" hgap="5" vgap="5" alignment="CENTER" style="-fx-padding: 5;"/>
+            </ScrollPane>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="🔴 Occupé" style="-fx-font-size: 10;"/>
+                <Label text="🟢 Libre" style="-fx-font-size: 10;"/>
+                <Label text="🟡 Sélection" style="-fx-font-size: 10;"/>
+            </HBox>
+        </VBox>
+    </HBox>
 </VBox>

@@ -21,6 +21,9 @@ public class InscriptionViewController {
 
     private final ClientDAO clientDAO = new ClientDAO();
 
+    /**
+     * Gère l'inscription d'un nouvel utilisateur.
+     */
     @FXML
     private void handleInscription() {
         String nom = txtNom.getText().trim();
@@ -33,26 +36,37 @@ public class InscriptionViewController {
             return;
         }
 
-        // Création du client (on met 0 pour l'ID, la BDD l'auto-incrémente)
+        // Création du client (ID 0 car auto-incrémenté en BDD)
         Client nouveauClient = new Client(0, nom, prenom, email);
-        nouveauClient.setRole("CLIENT"); // Par défaut c'est un client
+        nouveauClient.setRole("CLIENT"); // Rôle par défaut
 
-        // On l'ajoute en BDD via le DAO
+        // Ajout en base de données
         clientDAO.addClient(nouveauClient);
 
         showAlert("Succès", "Votre compte a été créé ! Vous pouvez vous connecter.");
-        goToLogin();
+        retourLogin(); // Redirection automatique après succès
     }
 
+    /**
+     * Redirige vers la fenêtre de connexion.
+     * Le nom doit être retourLogin pour correspondre au FXML (onAction="#retourLogin").
+     */
     @FXML
-    private void goToLogin() {
+    private void retourLogin() {
         try {
+            // Chargement de la vue Login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
             Parent root = loader.load();
+
+            // Récupération de la fenêtre actuelle (Stage) via n'importe quel composant
             Stage stage = (Stage) txtEmail.getScene().getWindow();
+
+            // Changement de la scène
             stage.setScene(new Scene(root));
             stage.setTitle("Billetterie - Connexion");
+            stage.show();
         } catch (IOException e) {
+            System.err.println("Erreur : Le fichier LoginView.fxml est introuvable dans /view/");
             e.printStackTrace();
         }
     }

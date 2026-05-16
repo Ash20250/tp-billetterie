@@ -1,194 +1,141 @@
 package dao;
 
 import model.Client;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDAO {
 
-    public Client getLoggedUser(String email, String password) {
-        Client client = null;
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT * FROM client WHERE email = ? AND password = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
+    private final String url = "jdbc:mysql://localhost:3306/billeterie";
+    private final String user = "root";
+    private final String password = "";
+
+    /**
+     * ✅ REQUIS par LoginViewController (Ligne 33)
+     * Vérifie les identifiants et retourne l'objet Client correspondant.
+     */
+    public Client getLoggedUser(String email, String mdp) {
+        String query = "SELECT * FROM client WHERE email = ? AND password = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, email);
+            pstmt.setString(2, mdp);
+            ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                client = new Client(
-                        rs.getInt("id_client"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("num_tel"),
-                        rs.getInt("age"),
-                        rs.getString("adresse")
-                );
-                client.setRole(rs.getString("role"));
+                return mapResultSetToClient(rs);
             }
-        } catch (Exception e) {
-            System.out.println("Erreur getLoggedUser : " + e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return client;
+        return null;
+    }
+
+    /**
+     * ✅ REQUIS par ClientFormController
+     * Met à jour un client existant.
+     */
+    public boolean updateClient(Client client) {
+        String query = "UPDATE client SET nom = ?, prenom = ?, email = ?, num_tel = ?, age = ?, adresse = ?, role = ? WHERE id_client = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, client.getNom());
+            pstmt.setString(2, client.getPrenom());
+            pstmt.setString(3, client.getEmail());
+            pstmt.setString(4, client.getNumTel());
+            pstmt.setInt(5, client.getAge());
+            pstmt.setString(6, client.getAdresse());
+            pstmt.setString(7, client.getRole());
+            pstmt.setInt(8, client.getId_client());
+
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * ✅ REQUIS par ListeBilletsViewController
+     */
+    public Client getClientById(int id) {
+        String query = "SELECT * FROM client WHERE id_client = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return mapResultSetToClient(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean addClient(Client client) {
+        String query = "INSERT INTO client (nom, prenom, email, num_tel, age, adresse, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, client.getNom());
+            pstmt.setString(2, client.getPrenom());
+            pstmt.setString(3, client.getEmail());
+            pstmt.setString(4, client.getNumTel());
+            pstmt.setInt(5, client.getAge());
+            pstmt.setString(6, client.getAdresse());
+            pstmt.setString(7, client.getRole());
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public List<Client> getAllClients() {
         List<Client> clients = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT * FROM client";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
-
+        String query = "SELECT * FROM client";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
-                Client client = new Client(
-                        rs.getInt("id_client"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("num_tel"),
-                        rs.getInt("age"),
-                        rs.getString("adresse")
-                );
-                client.setRole(rs.getString("role"));
-                clients.add(client);
+                clients.add(mapResultSetToClient(rs));
             }
-        } catch (Exception e) {
-            System.out.println("Erreur getAllClients : " + e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return clients;
     }
 
-    public Client getClientById(int id) {
-        Client client = null;
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT * FROM client WHERE id_client = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                client = new Client(
-                        rs.getInt("id_client"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("num_tel"),
-                        rs.getInt("age"),
-                        rs.getString("adresse")
-                );
-                client.setRole(rs.getString("role"));
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur getClientById : " + e.getMessage());
-        }
-        return client;
-    }
-
-    public void addClient(Client client) {
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "INSERT INTO client (nom, prenom, email, num_tel, age, adresse, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, client.getNom());
-            stmt.setString(2, client.getPrenom());
-            stmt.setString(3, client.getEmail());
-            stmt.setString(4, client.getNumTel());
-            stmt.setInt(5, client.getAge());
-            stmt.setString(6, client.getAdresse());
-            stmt.setString(7, "1234");
-            stmt.setString(8, "CLIENT");
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Erreur addClient : " + e.getMessage());
+    public boolean deleteClient(int id) {
+        String query = "DELETE FROM client WHERE id_client = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void updateClient(Client client) {
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "UPDATE client SET nom=?, prenom=?, email=?, num_tel=?, age=?, adresse=?, role=? WHERE id_client=?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, client.getNom());
-            stmt.setString(2, client.getPrenom());
-            stmt.setString(3, client.getEmail());
-            stmt.setString(4, client.getNumTel());
-            stmt.setInt(5, client.getAge());
-            stmt.setString(6, client.getAdresse());
-            stmt.setString(7, client.getRole());
-            stmt.setInt(8, client.getId_client());
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Erreur updateClient : " + e.getMessage());
-        }
+    // Centralisation du mapping pour éviter les erreurs de colonnes
+    private Client mapResultSetToClient(ResultSet rs) throws SQLException {
+        return new Client(
+                rs.getInt("id_client"),
+                rs.getString("nom"),
+                rs.getString("prenom"),
+                rs.getString("email"),
+                rs.getString("num_tel"),
+                rs.getInt("age"),
+                rs.getString("adresse"),
+                rs.getString("role")
+        );
     }
 
-    public void deleteClient(int id) {
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "DELETE FROM client WHERE id_client = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Erreur deleteClient : " + e.getMessage());
-        }
-    }
-
-    public List<Client> searchClientsByName(String keyword) {
-        List<Client> clients = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT * FROM client WHERE nom LIKE ? OR prenom LIKE ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, "%" + keyword + "%");
-            stmt.setString(2, "%" + keyword + "%");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Client client = new Client(
-                        rs.getInt("id_client"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("num_tel"),
-                        rs.getInt("age"),
-                        rs.getString("adresse")
-                );
-                client.setRole(rs.getString("role"));
-                clients.add(client);
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur searchClientsByName : " + e.getMessage());
-        }
-        return clients;
-    }
-
-    public List<Client> getClientsBySpectacle(int idSpectacle) {
-        List<Client> clients = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection()) {
-            String sql = "SELECT c.* FROM client c " +
-                    "JOIN billet b ON c.id_client = b.id_client " +
-                    "WHERE b.id_spectacle = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idSpectacle);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Client client = new Client(
-                        rs.getInt("id_client"),
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("num_tel"),
-                        rs.getInt("age"),
-                        rs.getString("adresse")
-                );
-                client.setRole(rs.getString("role"));
-                clients.add(client);
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur getClientsBySpectacle : " + e.getMessage());
-        }
-        return clients;
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, user, password);
     }
 }

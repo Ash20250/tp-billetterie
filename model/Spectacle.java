@@ -13,6 +13,9 @@ public class Spectacle {
     private String langue;
     private int age_minimum;
 
+    // ✅ Ajout du champ pour la gestion des places
+    private int placesDisponibles;
+
     public Spectacle(int id_spectacle, String titre, LocalDate date_spectacle, LocalTime heure_spectacle,
                      Salle salle, int duree, String langue, int age_minimum) {
         this.id_spectacle = id_spectacle;
@@ -25,12 +28,11 @@ public class Spectacle {
         this.age_minimum = age_minimum;
     }
 
+    // --- Getters ---
     public int getId_spectacle() { return id_spectacle; }
     public String getTitre() { return titre; }
-
     public String getNom() { return titre; }
     public String getNom_spectacle() { return titre; }
-
     public LocalDate getDate_spectacle() { return date_spectacle; }
     public LocalTime getHeure_spectacle() { return heure_spectacle; }
     public Salle getSalle() { return salle; }
@@ -38,6 +40,10 @@ public class Spectacle {
     public String getLangue() { return langue; }
     public int getAge_minimum() { return age_minimum; }
 
+    // ✅ Le getter manquant qui causait l'erreur "cannot find symbol"
+    public int getPlacesDisponibles() { return placesDisponibles; }
+
+    // --- Setters ---
     public void setTitre(String titre) { this.titre = titre; }
     public void setNom(String nom) { this.titre = nom; }
     public void setNom_spectacle(String nom) { this.titre = nom; }
@@ -48,6 +54,9 @@ public class Spectacle {
     public void setLangue(String langue) { this.langue = langue; }
     public void setAge_minimum(int age_minimum) { this.age_minimum = age_minimum; }
 
+    // ✅ Setter pour mettre à jour le nombre de places depuis le DAO
+    public void setPlacesDisponibles(int placesDisponibles) { this.placesDisponibles = placesDisponibles; }
+
     @Override
     public String toString() {
         String dateStr = (date_spectacle != null) ? date_spectacle.toString() : "date inconnue";
@@ -56,6 +65,6 @@ public class Spectacle {
 
         return titre + " - " + dateStr + " à " + heureStr +
                 " (" + salleStr + ") - durée : " + duree + " min - langue : " + langue +
-                " - âge minimum : " + age_minimum + " ans";
+                " - âge minimum : " + age_minimum + " ans - Places : " + placesDisponibles;
     }
 }
