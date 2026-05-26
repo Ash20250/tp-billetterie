@@ -9,7 +9,7 @@ public class ClientDAO {
 
     private final String url = "jdbc:mysql://localhost:3306/billeterie";
     private final String user = "root";
-    private final String password = "";
+    private final String passwordConnection = ""; // Renommé pour éviter la confusion avec le mot de passe client
 
     /**
      * ✅ REQUIS par LoginViewController (Ligne 33)
@@ -76,10 +76,14 @@ public class ClientDAO {
         return null;
     }
 
+    /**
+     * ✅ CORRIGÉ : Ajout du champ 'password' pour éviter l'erreur de valeur par défaut
+     */
     public boolean addClient(Client client) {
-        String query = "INSERT INTO client (nom, prenom, email, num_tel, age, adresse, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO client (nom, prenom, email, num_tel, age, adresse, role, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setString(1, client.getNom());
             pstmt.setString(2, client.getPrenom());
             pstmt.setString(3, client.getEmail());
@@ -87,6 +91,8 @@ public class ClientDAO {
             pstmt.setInt(5, client.getAge());
             pstmt.setString(6, client.getAdresse());
             pstmt.setString(7, client.getRole());
+            pstmt.setString(8, client.getPassword()); // Injection du mot de passe en 8ème position
+
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +127,10 @@ public class ClientDAO {
         }
     }
 
-    // Centralisation du mapping pour éviter les erreurs de colonnes
+    /**
+     * ✅ CORRIGÉ : Ajout du mapping pour le password
+     * (Vérifie bien que ton constructeur dans Client.java accepte le password en dernier paramètre)
+     */
     private Client mapResultSetToClient(ResultSet rs) throws SQLException {
         return new Client(
                 rs.getInt("id_client"),
@@ -131,11 +140,12 @@ public class ClientDAO {
                 rs.getString("num_tel"),
                 rs.getInt("age"),
                 rs.getString("adresse"),
-                rs.getString("role")
+                rs.getString("role"),
+                rs.getString("password") // Récupération du mot de passe
         );
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(url, user, passwordConnection);
     }
 }
