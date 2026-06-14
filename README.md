@@ -4,7 +4,7 @@ BilletTech est une application de bureau développée en **Java** permettant de 
 
 ---
 
-## 🔑 Identifiants de test (Pour le Jury)
+## 🔑 Identifiants Jury
 
 Pour vous connecter et tester l'application avec les différents niveaux d'accréditation, vous pouvez utiliser les comptes suivants :
 
