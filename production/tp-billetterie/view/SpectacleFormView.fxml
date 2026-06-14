@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="view.SpectacleFormController" spacing="10">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Gestion du Spectacle" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <Label text="Titre :" />
+    <TextField fx:id="txtTitre" promptText="Titre du spectacle" />
+
+    <Label text="Date :" />
+    <DatePicker fx:id="dateSpectacle" promptText="Date de l'évènement" maxWidth="Infinity" />
+
+    <Label text="Heure (HH:mm:ss) :" />
+    <TextField fx:id="txtHeure" promptText="Ex: 20:00:00" />
+
+    <Label text="Salle :" />
+    <ComboBox fx:id="comboSalle" promptText="Choisir une salle" maxWidth="Infinity" />
+
+    <Label text="Durée (minutes) :" />
+    <Spinner fx:id="spinnerDuree" maxWidth="Infinity" editable="true" />
+
+    <Label text="Langue :" />
+    <TextField fx:id="txtLangue" promptText="Langue" />
+
+    <Label text="Âge minimum :" />
+    <Spinner fx:id="spinnerAgeMinimum" maxWidth="Infinity" editable="true" />
+
+    <Separator />
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Annuler" onAction="#handleAnnuler" />
+        <Button text="Enregistrer" onAction="#saveSpectacle"
+                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" />
+    </HBox>
+</VBox>

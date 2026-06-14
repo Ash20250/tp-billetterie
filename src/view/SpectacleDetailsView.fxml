@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21.0.9"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="view.SpectacleDetailsViewController"
+      spacing="20" alignment="TOP_CENTER"
+      style="-fx-padding: 30; -fx-background-color: #f8f9fa;">
+
+    <!-- Titre stylé -->
+    <Label fx:id="lblTitre" style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+    <Separator prefWidth="300" />
+
+    <!-- Conteneur des détails avec un look "Card" -->
+    <VBox spacing="15" alignment="CENTER_LEFT"
+          style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+
+        <Label fx:id="lblDate" style="-fx-font-size: 16; -fx-text-fill: #34495e;"/>
+        <Label fx:id="lblHeure" style="-fx-font-size: 16; -fx-text-fill: #34495e;"/>
+        <Label fx:id="lblSalle" style="-fx-font-size: 16; -fx-text-fill: #34495e;"/>
+        <Label fx:id="lblDuree" style="-fx-font-size: 16; -fx-text-fill: #34495e;"/>
+        <Label fx:id="lblLangue" style="-fx-font-size: 16; -fx-text-fill: #34495e;"/>
+    </VBox>
+
+</VBox>
