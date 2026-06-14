@@ -10,8 +10,8 @@ Pour vous connecter et tester l'application avec les différents niveaux d'accr�
 
 | Rôle | Adresse Email | Mot de passe | Fonctionnalités accessibles |
 | :--- | :--- | :--- | :--- |
-| **Administrateur** | `admin@test.com` | `1234` | Gestion complète (CRUD) des spectacles, utilisateurs et statistiques. |
-| **Utilisateur / Client** | `test@gmail.com` | `1234` | Consultation des spectacles, achat de billets et historique des réservations. |
+| **Administrateur** | `admin@test.com` | `admin` | Gestion complète (CRUD) des spectacles, utilisateurs et statistiques. |
+| **Utilisateur / Client** | `jean.dupont@test.com` | `pass123` | Consultation des spectacles, achat de billets et historique des réservations. |
 
 ---
 
