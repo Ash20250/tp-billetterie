@@ -63,6 +63,6 @@ IntelliJ IDEA (ou tout autre IDE Java).
    ```bash
    git clone [https://github.com/Ash20250/tp-billetterie.git](https://github.com/Ash20250/tp-billetterie.git)
 
-3. 2. **Base de données :**
+3. **Base de données :**
    - Créez une base de données nommée `tp-billetterie` dans votre serveur MySQL.
    - Importez le fichier `.sql` situé dans le dossier `/database` (exportez votre base actuelle et placez le fichier dans ce dossier).
