@@ -10,7 +10,7 @@ public class ClientDAO {
     // Utilisation de l'URL corrigée
     private final String url = "jdbc:mysql://localhost:3306/tp-billetterie?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Paris";
     private final String user = "root";
-    private final String passwordConnection = "";
+    private final String passwordConnection = "Biblio2026";
 
     /**
      * ✅ REQUIS par LoginViewController

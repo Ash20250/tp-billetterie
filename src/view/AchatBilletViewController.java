@@ -31,6 +31,14 @@ public class AchatBilletViewController {
     private final List<String> placesSelectionnees = new ArrayList<>();
     private final double PRIX_UNITAIRE = 45.00;
 
+    /**
+     * Méthode publique pour calculer le total.
+     * Ajoutée pour faciliter les tests unitaires.
+     */
+    public double calculerTotal(int nombrePlaces) {
+        return nombrePlaces * this.PRIX_UNITAIRE;
+    }
+
     @FXML
     public void initialize() {
         comboStatut.getItems().setAll("Payé", "Réservé");
@@ -84,7 +92,7 @@ public class AchatBilletViewController {
                             btn.setStyle("-fx-background-color: #f1c40f; -fx-text-fill: black;");
                         }
                         fieldPlace.setText(String.join(", ", placesSelectionnees));
-                        lblPrixTotal.setText(String.format("%.2f €", placesSelectionnees.size() * PRIX_UNITAIRE));
+                        lblPrixTotal.setText(String.format("%.2f €", calculerTotal(placesSelectionnees.size())));
                     });
                 }
                 gridSalle.add(btn, j, i);
