@@ -52,6 +52,17 @@ Le projet respecte une architecture logicielle stricte pour séparer les respons
 
 Pour lancer le projet en local sur votre machine :
 
-1. **Cloner le dépôt :**
+1. **Prérequis**
+Java JDK 21 ou supérieur.
+
+Un serveur MySQL (XAMPP, WAMP ou installation locale).
+
+IntelliJ IDEA (ou tout autre IDE Java).
+
+2. **Cloner le dépôt :**
    ```bash
    git clone [https://github.com/Ash20250/tp-billetterie.git](https://github.com/Ash20250/tp-billetterie.git)
+
+3. 2. **Base de données :**
+   - Créez une base de données nommée `tp-billetterie` dans votre serveur MySQL.
+   - Importez le fichier `.sql` situé dans le dossier `/database` (exportez votre base actuelle et placez le fichier dans ce dossier).
